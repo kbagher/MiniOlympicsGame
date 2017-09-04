@@ -1,7 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class Cycling extends Game {
 	Participant[] cyclistsArray;
@@ -22,20 +20,8 @@ public class Cycling extends Game {
 	}
 
 	@Override
-	@Deprecated
-	public Participant[] displayParticipants() {
-		System.out.println("No  Name         id");
-		int i = 1;
-		for (Participant athlete : cyclistsArray) {
-//			System.out.println(i + ".  " + addWhitespaces(athlete.getName()) + "       " + athlete.getId());
-			i++;
-		}
-		return cyclistsArray;
-	}
-
-	@Override
 	public Athlete getRandomAthlete() {
-		ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Cycling,true);
+		ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Cycling);
 		int random = GeneralFunctions.getInstance().getRandomNumber(0,athletes.size()-1);
 		return athletes.get(random);
 	}

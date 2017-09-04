@@ -1,10 +1,10 @@
 
 public abstract class Participant {
-	protected String state;
-	protected String name;
-	protected int age;
-	protected int id;
-	protected GameType sportType;
+	String state;
+	String name;
+	int age;
+	int id;
+	GameType sportType;
 
 	public String getName(){
 	    return name;

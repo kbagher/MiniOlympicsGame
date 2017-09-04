@@ -76,13 +76,13 @@ public class DatabaseOperations {
         return athletes;
     }
 
-    public ArrayList<Athlete> getAthletesForSport(GameType sport, boolean superAthlete) {
+    public ArrayList<Athlete> getAthletesForSport(GameType sport) {
         populateData();
 
         ArrayList<Athlete> list = new ArrayList<>();
 
         for (Athlete a : athletes) {
-            if (a.getSportType() == sport || (superAthlete ? (a.getSportType() == GameType.SuperAthlete) : false))
+            if (a.getSportType() == sport || ((a.getSportType() == GameType.SuperAthlete)))
                 list.add(a);
         }
 

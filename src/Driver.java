@@ -16,28 +16,13 @@ import java.util.Scanner;
 
 public class Driver {
 
-    Scanner scan;
-    Athlete userPrediction;
-    // remove
-    int usrPrediction;
-
-    Game[] sportArray;
-    ArrayList<Game> games = new ArrayList<>();
-    int sportsIndex;
-    int swimmingCode;
-    int cyclingCode;
-    int runningCode;
-    Participant[] athletesArray;
+    private Scanner scan;
+    private Athlete userPrediction;
+    private ArrayList<Game> games;
 
     public Driver() {
         scan = new Scanner(System.in);
-        usrPrediction = -1;
-        sportArray = new Game[20];
-        sportsIndex = 0;
-        swimmingCode = 1;
-        cyclingCode = 1;
-        runningCode = 1;
-        athletesArray = Game.getAthletesArray();
+        games = new ArrayList<>();
     }
 
     public void displayMainMenu() {
@@ -68,7 +53,7 @@ public class Driver {
                     startGame();
                     break;
                 case 4:
-                    displayTheFinalResults();
+                    displayAllResults();
                     break;
                 case 5:
                     displayAthletesPoints();
@@ -80,20 +65,19 @@ public class Driver {
     private int getUserInput() {
         try {
             System.out.print("Enter an option: ");
-            int in = Integer.parseInt(scan.nextLine());
-            return in;
+            return Integer.parseInt(scan.nextLine());
         } catch (Exception e) {
             scan.next();
             return -1;
         }
     }
 
-    public void pressToContinue() {
+    private void pressToContinue() {
         System.out.println("Press return to continue...\n\n");
         scan.nextLine();
     }
 
-    private void displayOutOfRangeOptionMessage(int min, int max) {
+    private void displayOutOfRangeOptionMessage(@SuppressWarnings("SameParameterValue") int min, int max) {
         System.out.println("\nPlease enter a number between " + min + " and " + max + "\n");
         pressToContinue();
     }
@@ -121,24 +105,20 @@ public class Driver {
         // reset prediction
         userPrediction = null;
         // remove
-        usrPrediction = -1;
         switch (userInput) {
             case 1:
                 Running r = new Running();
                 r.addAthletes();
                 games.add(r);
-                sportArray[sportsIndex] = r;
                 break;
             case 2:
                 Cycling c = new Cycling();
                 c.addAthletes();
-                sportArray[sportsIndex] = c;
                 games.add(c);
                 break;
             case 3:
                 Swimming s = new Swimming();
                 s.addAthletes();
-                sportArray[sportsIndex] = s;
                 games.add(s);
                 break;
         }
@@ -151,6 +131,11 @@ public class Driver {
         } else {
             return null;
         }
+    }
+
+    private void displayNoGamesPlayed() {
+        System.out.println("\nNO games played yet.\n\n");
+        pressToContinue();
     }
 
     private void displaySelectGame() {
@@ -196,27 +181,26 @@ public class Driver {
             System.out.println("\nNo enough players! The game has been canceled.");
             game.displayResults();
             pressToContinue();
-            return;
         }
         else if (status == GameStatus.Completed) {
             System.out.println();
-            game.displayAthletesRankByTime();
+            game.displayResults();
             pressToContinue();
         }
     }
 
-    private void displayTheFinalResults() {
-        // To make sure there are games played
-        if (sportsIndex > 0) {
-            System.out.println("The final results of all games played today are:");
-            // Check each index played not the whole array
-            for (int i = 0; i < sportsIndex; i++) {
-                // check each object in array and get its results
-                sportArray[i].displayResults();
-            }
-        } else
-            System.out.println("There is no games played today !!\n");
+    private void displayAllResults() {
+        if (games.size()==0){
+            displayNoGamesPlayed();
+            return;
+        }
 
+        System.out.println("================================");
+        for (Game game:games) {
+            game.displayResults();
+        }
+        System.out.println("================================\n");
+        pressToContinue();
     }
 
     private void makePrediction() {
@@ -246,44 +230,19 @@ public class Driver {
     }
 
     private void displayAthletesPoints() {
-        // To declare referee to give the points
-        Participant headOfficial = new Official();
-        // Casting for headOfficial to use summerizeFinalresultsByScore method
-        athletesArray = ((Official) headOfficial).summerizeFinalresultsByScore(athletesArray);
-        System.out.println("Rank Name         Score\n");
-        int i = 1;
-        // for each loop to check all the array
-        for (Participant athlete : athletesArray) {
-            System.out.println(addWhitespaces(i + "." + athlete.getName()) + ""
-                    + ((Athlete) athlete).getScore() + "\n");
-            i++;
-        }
-    }
+        Official bigBoss = new Official();
+        ArrayList<Athlete> athletes= DatabaseOperations.getInstance().getAllAthletes();
+        bigBoss.summerizeResultsByScore(athletes);
 
-    // To increase the index of each game to have different GameId
-    private void gameCodeIncrement(String sport) {
-        switch (sport) {
-            case "Swimming":
-                swimmingCode++;
-                break;
-            case "Running":
-                runningCode++;
-                break;
-            default:
-                cyclingCode++;
-                break;
+        System.out.printf("\n%-5s %-20s %-5s %n", "Rank", "Name", "Score",
+                "total");
+        int index = 0;
+        for (Athlete athlete : athletes) {
+            System.out.printf("%-5s %-20s %-5s %n", index + 1, athlete.getName(), athlete.getScore());
+            index++;
         }
-
-    }
-
-    public String addWhitespaces(String name) {
-        int nameLength = name.length();
-        int NOWhitespaces = 18 - nameLength;
-        String nameWithSpaces = name;
-        for (int i = 0; i < NOWhitespaces; i++) {
-            nameWithSpaces = nameWithSpaces + " ";
-        }
-        return nameWithSpaces;
+        System.out.println();
+        pressToContinue();
     }
 
 }

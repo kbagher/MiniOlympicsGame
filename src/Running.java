@@ -35,21 +35,9 @@ class Running extends Game {
 		return "Running";
 	}
 
-	@Override
-    @Deprecated
-	public Participant[] displayParticipants() {
-		System.out.println("No  Name         id");
-		int i = 1;
-		for (Participant athlete : sprintersArray) {
-//			System.out.println(i + ".  " + addWhitespaces(athlete.getName()) + "       " + athlete.getId());
-			i++;
-		}
-		return sprintersArray;
-	}
-
     @Override
     public Athlete getRandomAthlete() {
-        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Running,true);
+        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Running);
         int random = GeneralFunctions.getInstance().getRandomNumber(0,athletes.size()-1);
         return athletes.get(random);
     }

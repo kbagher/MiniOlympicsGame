@@ -2,26 +2,19 @@ import java.util.ArrayList;
 
 abstract class Game {
 
-    // to keep its value and take them from Participant Class
-    static ArrayList<Athlete> athletesArray = DatabaseOperations.getInstance().getAllAthletes();
+    Official official;
+    String gameID;
+    GameStatus status;
+    private ArrayList<Athlete> participatedAthletes;
 
-    protected final int minParticipants = 5;
-    protected Official official;
-    protected String gameID;
-    protected GameStatus status;
-    protected ArrayList<Athlete> participatedAthletes;
+    protected abstract int compete();
 
-    public abstract int compete();
-
-    public abstract Athlete getRandomAthlete();
+    protected abstract Athlete getRandomAthlete();
 
 
     public abstract String getSportName();
 
-    @Deprecated
-    public abstract Participant[] displayParticipants();
-
-    public Game() {
+    Game() {
         status = GameStatus.Waiting;
         participatedAthletes = new ArrayList<>();
     }
@@ -32,7 +25,10 @@ abstract class Game {
 
     public void displayResults() {
         displayGameInfo();
-        displayParticipatedAthletes();
+        if (status == GameStatus.Canceled || status == GameStatus.Waiting)
+            displayParticipatedAthletes();
+        else
+            displayAthletesRankByTime();
     }
 
 
@@ -66,11 +62,12 @@ abstract class Game {
         return status;
     }
 
-    public boolean haveEnoughParticipants() {
+    private boolean haveEnoughParticipants() {
+        int minParticipants = 5;
         return participatedAthletes.size() >= minParticipants;
     }
 
-    public void displayAthletesRankByTime() {
+    private void displayAthletesRankByTime() {
         displayGameInfo();
         official.summerizeResultsByTime(participatedAthletes);
         System.out.printf("%-5s %-20s %-5s %n", "Rank", "Name", "Time",
@@ -120,7 +117,7 @@ abstract class Game {
     }
 
     // must be sorted
-    public void setAthletesScores() {
+    private void setAthletesScores() {
         // must be sorted first
         official.summerizeResultsByTime(participatedAthletes);
 
@@ -128,12 +125,4 @@ abstract class Game {
         participatedAthletes.get(1).setScore(2);
         participatedAthletes.get(2).setScore(1);
     }
-
-    public static Participant[] getAthletesArray() {
-        Participant[] p = new Participant[athletesArray.size()];
-        for (int x = 0; x < athletesArray.size(); x++)
-            p[x] = athletesArray.get(x);
-        return p;
-    }
-
 }

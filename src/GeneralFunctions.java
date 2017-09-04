@@ -22,7 +22,8 @@ public class GeneralFunctions {
         return r.nextInt((max - min) + 1) + min;
     }
 
-    public boolean isInRange(int min,int max, int num){
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean isInRange(@SuppressWarnings("SameParameterValue") int min, int max, int num){
         return !(num > max || num < min);
     }
 

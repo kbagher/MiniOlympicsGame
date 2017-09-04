@@ -12,8 +12,6 @@
 * we will not be liable any damage suffered as result of using this program */
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class Swimming extends Game {
 
@@ -36,20 +34,8 @@ public class Swimming extends Game {
     }
 
     @Override
-    @Deprecated
-    public Participant[] displayParticipants() {
-        System.out.println("No  Name         id");
-        int i = 1;
-        for (Participant athlete : swimmersArray) {
-//			System.out.println(i + ".  " + addWhitespaces(athlete.getName()) + "       " + athlete.getId());
-            i++;
-        }
-        return swimmersArray;
-    }
-
-    @Override
     public Athlete getRandomAthlete() {
-        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Swimming,true);
+        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Swimming);
         int random = GeneralFunctions.getInstance().getRandomNumber(0,athletes.size()-1);
         return athletes.get(random);
     }
