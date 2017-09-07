@@ -1,31 +1,65 @@
-
+/**
+ * Athlete class holds athlete information, competition score and time.
+ *
+ * @author Khalid
+ */
 public class Athlete extends Participant {
 
-	private int score;
-	private int time;
+    /**
+     * Athlete total score
+     */
+    private int score;
+    /**
+     * Athlete competition time for the game
+     */
+    private int time;
 
-	public Athlete(int id, String name, GameType type, String state, int age) {
-        super.sportType = type;
-	    super.name = name;
-        super.state = state;
-		super.id = id;
-		super.age = age;
-	}
+    /**
+     * Instantiates a new Athlete object.
+     *
+     * @param id    athlete id
+     * @param name  athlete  name
+     * @param type  athlete game type
+     * @param state athlete state
+     * @param age   athlete age
+     */
+    public Athlete(int id, String name, GameType type, String state, int age) {
+        super(id, name, type, state, age);
+    }
 
-	public void setScore(int score) {
-		// Add new score to the old one
-		this.score += score;
-	}
+    /**
+     * Sets athlete score based on game rank
+     *
+     * @param score athlete score in the game
+     */
+    public void setScore(int score) {
+        this.score += score; // total score across all games
+    }
 
+    /**
+     * Gets the athletes time for last his competition
+     *
+     * @return competition time
+     */
     public int getTime() {
         return time;
     }
-	
-	public void setTime(int time) {
-		this.time = time;
-	}
 
-	public int getScore() {
-		return score;
-	}
+    /**
+     * Sets the athletes time for last his competition
+     *
+     * @param time competition time
+     */
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    /**
+     * Gets the athlete's total score.
+     *
+     * @return athlete's score
+     */
+    public int getScore() {
+        return score;
+    }
 }

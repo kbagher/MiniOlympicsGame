@@ -21,8 +21,7 @@ class Running extends Game {
 
 	// takes only one variable to enter
 	public Running() {
-        this.gameID = DatabaseOperations.getInstance().createNewGame(GameType.Running);
-        official = DatabaseOperations.getInstance().getOfficialForSport(GameType.Running);
+        super(DatabaseOperations.getInstance().createNewGame(GameType.Running), DatabaseOperations.getInstance().getOfficialForSport(GameType.Running));
     }
 
     @Override

@@ -19,8 +19,7 @@ public class Swimming extends Game {
 
 	// takes only one variable to enter
 	public Swimming() {
-        this.gameID = DatabaseOperations.getInstance().createNewGame(GameType.Swimming);
-        official = DatabaseOperations.getInstance().getOfficialForSport(GameType.Swimming);
+        super(DatabaseOperations.getInstance().createNewGame(GameType.Swimming), DatabaseOperations.getInstance().getOfficialForSport(GameType.Swimming));
 	}
 
     @Override

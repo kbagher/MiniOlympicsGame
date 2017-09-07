@@ -1,11 +1,4 @@
-//the data input will be read from this class as a hard coded data collection.
 
-/*  @version 2 01 April 2017 
-*  @author Abdulaziz Bazuhayr & Turki Ajandal
-*   * Copyright  2017  All Rights Reserved. *
-* the proprietary information of this program is confidential . You shall not
-* use it only if you have written permission from Turki al jandal & Abdulaziz Bazuhayr
-* we will not be liable any damage suffered as result of using this program */
 
 import java.util.ArrayList;
 

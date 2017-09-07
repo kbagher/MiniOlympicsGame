@@ -85,7 +85,7 @@ public class Driver {
     private void selectGame() {
 
         if (games.size() > 0) {
-            if (getLastGame().status == GameStatus.Waiting) {
+            if (getLastGame().getStatus() == GameStatus.Waiting) {
                 displayGameAlreadySelected();
                 return;
             }
@@ -162,7 +162,7 @@ public class Driver {
         Game game = getLastGame();
 
         if (game != null) {
-            if (game.status != GameStatus.Waiting) {
+            if (game.getStatus() != GameStatus.Waiting) {
                 displaySelectGame();
                 return;
             }
@@ -179,25 +179,27 @@ public class Driver {
 
         if (status == GameStatus.Canceled) {
             System.out.println("\nNo enough players! The game has been canceled.");
-            game.displayResults();
+            game.displayResults("");
             pressToContinue();
-        }
-        else if (status == GameStatus.Completed) {
+        } else if (status == GameStatus.Completed) {
             System.out.println();
-            game.displayResults();
+            String msg = "Your prediction is wrong :(\n";
+            if (userPrediction == game.getWinner())
+                msg = "Your prediction is right :)\n";
+            game.displayResults(msg);
             pressToContinue();
         }
     }
 
     private void displayAllResults() {
-        if (games.size()==0){
+        if (games.size() == 0) {
             displayNoGamesPlayed();
             return;
         }
 
         System.out.println("================================");
-        for (Game game:games) {
-            game.displayResults();
+        for (Game game : games) {
+            game.displayResults("");
         }
         System.out.println("================================\n");
         pressToContinue();
@@ -206,7 +208,7 @@ public class Driver {
     private void makePrediction() {
 
         if (games.size() > 0) {
-            if (getLastGame().status != GameStatus.Waiting) {
+            if (getLastGame().getStatus() != GameStatus.Waiting) {
                 displaySelectGame();
                 return;
             }
@@ -230,9 +232,9 @@ public class Driver {
     }
 
     private void displayAthletesPoints() {
-        Official bigBoss = new Official();
-        ArrayList<Athlete> athletes= DatabaseOperations.getInstance().getAllAthletes();
-        bigBoss.summerizeResultsByScore(athletes);
+        Official gameOfficial = DatabaseOperations.getInstance().getOfficialForSport(GameType.Running);
+        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAllAthletes();
+        gameOfficial.summerizeResultsByScore(athletes);
 
         System.out.printf("\n%-5s %-20s %-5s %n", "Rank", "Name", "Score",
                 "total");
