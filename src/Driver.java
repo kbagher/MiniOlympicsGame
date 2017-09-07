@@ -1,24 +1,12 @@
 
-/*In this class  user will interact with the program from this class.
- *  User will enter the choice and the choice will be checked automatically by the program by inputValidation method.
- */
-
-/*  @version 3 04 April 2017
-*   @author Abdulaziz Bazuhayr & Turki Aljandal
-*    * Copyright  2017  All Rights Reserved. *
-* the proprietary information of this program is confidential . You shall not
-* use it only if you have written permission from Turki al jandal & Abdulaziz Bazuhayr
-* we will not be liable any damage suffered as result of using this program */
-
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
 
-    private Scanner scan;
+    private final Scanner scan;
     private Athlete userPrediction;
-    private ArrayList<Game> games;
+    private final ArrayList<Game> games;
 
     public Driver() {
         scan = new Scanner(System.in);

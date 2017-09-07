@@ -2,22 +2,62 @@
 
 import java.util.ArrayList;
 
+/**
+ * <p>Maintain database operations and connections.</p>
+ * <p>
+ * The implementation of this class will be changed for assignment 2.
+ *
+ * @author Kassem
+ */
 public class DatabaseOperations {
 
+    /**
+     * Determine if data is already populated or not
+     */
     private boolean isPopulated = false;
+    /**
+     * Static object following singleton pattern
+     */
     private static final DatabaseOperations instance = new DatabaseOperations();
-    private ArrayList<Athlete> athletes = new ArrayList<>();
-    private ArrayList<Official> officials = new ArrayList<>();
+    /**
+     * List of all available athletes in the database
+     */
+    private final ArrayList<Athlete> athletes = new ArrayList<>();
+    /**
+     * List of all available officials in the database
+     */
+    private final ArrayList<Official> officials = new ArrayList<>();
+    /**
+     * Maintains swimming game id
+     */
     private int swimmingID = 0;
+    /**
+     * Maintains running game id
+     */
     private int runningID = 0;
+    /**
+     * Maintains cycling game id
+     */
     private int cyclingID = 0;
 
-    private DatabaseOperations(){}
+    /**
+     * Disable instantiation following the singleton pattern
+     */
+    private DatabaseOperations() {
+    }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static DatabaseOperations getInstance() {
         return instance;
     }
 
+    /**
+     * populate dummy data
+     */
     private void populateData() {
         if (isPopulated)
             return;
@@ -27,12 +67,18 @@ public class DatabaseOperations {
         isPopulated = true;
     }
 
+    /**
+     * populate officials data
+     */
     private void populateOfficials() {
         officials.add(new Official(1, "Jon", GameType.Swimming, "Victoria", 34));
         officials.add(new Official(2, "Khaled", GameType.Running, "New South Wales", 45));
         officials.add(new Official(3, "Kassem", GameType.Cycling, " Queensland", 51));
     }
 
+    /**
+     * populate athletes data
+     */
     private void populateAthletes() {
         // Swimmers
         athletes.add(new Athlete(1, "David", GameType.Swimming, "Victoria", 23));
@@ -64,16 +110,31 @@ public class DatabaseOperations {
 
     }
 
+    /**
+     * Gets all athletes in the database.
+     *
+     * @return list of available athletes
+     */
     public ArrayList<Athlete> getAllAthletes() {
         populateData();
         return athletes;
     }
 
+    /**
+     * Gets athletes for a specific sport.
+     *
+     * @param sport sport type
+     *
+     * @return the athletes for sport
+     */
     public ArrayList<Athlete> getAthletesForSport(GameType sport) {
+
+        // populate the data first
         populateData();
 
         ArrayList<Athlete> list = new ArrayList<>();
 
+        // return superAthletes also
         for (Athlete a : athletes) {
             if (a.getSportType() == sport || ((a.getSportType() == GameType.SuperAthlete)))
                 list.add(a);
@@ -82,8 +143,16 @@ public class DatabaseOperations {
         return list;
     }
 
+    /**
+     * <p>Create a new game.</p>
+     * <p>
+     * <p>This will add a new record in the database and return the game ID.</p>
+     *
+     * @param type game type to be created
+     *
+     * @return game ID
+     */
     public String createNewGame(GameType type) {
-        // perform necessary database operations later
         switch (type) {
             case Swimming:
                 return String.format("S%02d", ++swimmingID);
@@ -97,12 +166,18 @@ public class DatabaseOperations {
     }
 
 
+    /**
+     * Gets official for a specific sport.
+     *
+     * @param sport sport type
+     *
+     * @return game official
+     */
     public Official getOfficialForSport(GameType sport) {
-        populateData();
-        if (officials.size() == 0)
-            populateOfficials();
 
-        // Should be replaced by database call
+        // populate the data first
+        populateData();
+
         for (Official o : officials) {
             if (o.getSportType() == sport)
                 return o;

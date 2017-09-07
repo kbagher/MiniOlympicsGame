@@ -1,8 +1,17 @@
 
 import java.util.ArrayList;
 
+/**
+ * Cycling game class contains implementation for abstract
+ * methods in game class.
+ *
+ * @author Khalid
+ */
 public class Cycling extends Game {
 
+    /**
+     * Instantiates a new Cycling.
+     */
     public Cycling() {
         super(DatabaseOperations.getInstance().createNewGame(GameType.Cycling), DatabaseOperations.getInstance().getOfficialForSport(GameType.Cycling));
     }

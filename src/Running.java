@@ -1,43 +1,35 @@
-/*
-* The subclass RUNNING  will inherit from its superclass Sport and will concrete abstract methods and
-*  other methods which  are related with RUNNING sport only will be implemented in this class.
-*  For example, compete method will be invoked in Running class based on the time that will randomly
-*  generate  between 10 to 20 seconds 
-*  
-*   
-*  @version 3 04 April 2017 
-*  @author TURKI ALJANDAL
-*  @ reviewed by bdulaziz Bazuhayr 
-*   * Copyright  2017  All Rights Reserved. *
-* the proprietary information of this program is confidential . You shall not
-* use it only if you have written permission from Turki al jandal & Abdulaziz Bazuhayr
-* we will not be liable any damage suffered as result of using this program */
 
 import java.util.ArrayList;
 
+/**
+ * Running game class contains implementation for abstract
+ * methods in game class.
+ *
+ * @author Khalid
+ */
 class Running extends Game {
 
-    Participant[] sprintersArray;
-
-	// takes only one variable to enter
-	public Running() {
+    /**
+     * Instantiates a new Running.
+     */
+    public Running() {
         super(DatabaseOperations.getInstance().createNewGame(GameType.Running), DatabaseOperations.getInstance().getOfficialForSport(GameType.Running));
     }
 
     @Override
     public int compete() {
-        return GeneralFunctions.getInstance().getRandomNumber(10,20);
+        return GeneralFunctions.getInstance().getRandomNumber(10, 20);
     }
 
-	@Override
-	public String getSportName() {
-		return "Running";
-	}
+    @Override
+    public String getSportName() {
+        return "Running";
+    }
 
     @Override
     public Athlete getRandomAthlete() {
         ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Running);
-        int random = GeneralFunctions.getInstance().getRandomNumber(0,athletes.size()-1);
+        int random = GeneralFunctions.getInstance().getRandomNumber(0, athletes.size() - 1);
         return athletes.get(random);
     }
 
