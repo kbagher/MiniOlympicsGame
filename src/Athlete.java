@@ -1,7 +1,7 @@
 /**
  * Athlete class holds athlete information, competition score and time.
  *
- * @author Khalid
+ * @author Khaled
  */
 public class Athlete extends Participant {
 
@@ -38,7 +38,7 @@ public class Athlete extends Participant {
      * @param score athlete score in the game
      */
     public void addScore(int score) {
-        DatabaseOperations.getInstance().addScoreToAthlete(this,score);
+        DatabaseOperations.getInstance().addScoreToAthlete(this, score);
     }
 
     /**
@@ -62,6 +62,7 @@ public class Athlete extends Participant {
     /**
      * <p>Updates the athlete's score</p>
      * This method will add up the passed score to the total athlete score
+     *
      * @param score score to be added
      */
     public void setScore(int score) {

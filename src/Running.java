@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Running game class contains implementation for abstract
  * methods in game class.
  *
- * @author Khalid
+ * @author Khaled
  */
 class Running extends Game {
 

@@ -167,12 +167,14 @@ public class DatabaseOperations {
 
     /**
      * Gets reference to athlete object by ID
+     *
      * @param id athlete ID
+     *
      * @return athlete reference or null if not found
      */
-    public Athlete getAthleteByID(int id){
-        for (Athlete a:getAllAthletes()) {
-            if (a.getId() == id){
+    public Athlete getAthleteByID(int id) {
+        for (Athlete a : getAllAthletes()) {
+            if (a.getId() == id) {
                 return a;
             }
         }
@@ -180,13 +182,14 @@ public class DatabaseOperations {
     }
 
     /**
-     * A
+     * Adds score to the total athlete's score
+     *
      * @param athlete athlete object to add the score to
-     * @param score score
+     * @param score   score
      */
-    public void addScoreToAthlete(Athlete athlete,int score){
-        for (Athlete a:getAllAthletes()) {
-            if (athlete.getId() == a.getId()){
+    public void addScoreToAthlete(Athlete athlete, int score) {
+        for (Athlete a : getAllAthletes()) {
+            if (athlete.getId() == a.getId()) {
                 a.setScore(score);
             }
         }

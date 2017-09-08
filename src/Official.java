@@ -50,7 +50,7 @@ public class Official extends Participant {
      *
      * @return summarized athletes
      */
-    public ArrayList<Athlete> summerizeResultsByScore(ArrayList<Athlete> athletes) {
+    public void summarizeResultsByScore(ArrayList<Athlete> athletes) {
         // loop through athletes and sort them by score
         for (int i = 1; i < athletes.size(); i++) {
             for (int j = i; j > 0; j--) {
@@ -59,6 +59,5 @@ public class Official extends Participant {
                 }
             }
         }
-        return athletes;
     }
 }

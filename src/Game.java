@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Game class holds game information and operations
@@ -208,7 +207,12 @@ abstract class Game {
         System.out.println();
     }
 
-    private boolean containsAthete(Athlete athlete){
+    /**
+     * Check if the passed athlete exists in the game participants or not
+     * @param athlete athlete object to check his existence
+     * @return true if athlete exists
+     */
+    private boolean containsAthlete(Athlete athlete){
         for (Athlete a:participatedAthletes) {
             if (a.getId() == athlete.getId())
                 return true;
@@ -221,10 +225,10 @@ abstract class Game {
      */
     public void addAthletes() {
         // random number of athletes between 1 and 8
-        int numOfParticipants = GeneralFunctions.getInstance().getRandomNumber(5, 8);
+        int numOfParticipants = GeneralFunctions.getInstance().getRandomNumber(1, 8);
         while (participatedAthletes.size() != numOfParticipants) {
             Athlete a = getRandomAthlete();
-            if (!containsAthete(a))
+            if (!containsAthlete(a))
                 participatedAthletes.add(new Athlete(a)); // create a copy of the object
         }
     }

@@ -2,6 +2,8 @@ import java.util.Random;
 
 /**
  * General functions used across the program
+ *
+ * @author Khaled
  */
 public class GeneralFunctions {
     /**

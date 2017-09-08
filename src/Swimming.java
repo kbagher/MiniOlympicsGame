@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Swimming game class contains implementation for abstract
  * methods in game class.
  *
- * @author Khalid
+ * @author Khaled
  */
 public class Swimming extends Game {
 
