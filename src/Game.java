@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Game class holds game information and operations
@@ -132,7 +133,6 @@ abstract class Game {
         System.out.println("Game status: " + status.toString());
         System.out.println("Referee ID: " + official.getId());
         System.out.println("Referee name: " + official.getName() + "\n");
-
     }
 
     /**
@@ -208,16 +208,24 @@ abstract class Game {
         System.out.println();
     }
 
+    private boolean containsAthete(Athlete athlete){
+        for (Athlete a:participatedAthletes) {
+            if (a.getId() == athlete.getId())
+                return true;
+        }
+        return false;
+    }
+
     /**
      * Add random athletes to the game.
      */
     public void addAthletes() {
         // random number of athletes between 1 and 8
-        int numOfParticipants = GeneralFunctions.getInstance().getRandomNumber(1, 8);
+        int numOfParticipants = GeneralFunctions.getInstance().getRandomNumber(5, 8);
         while (participatedAthletes.size() != numOfParticipants) {
             Athlete a = getRandomAthlete();
-            if (!participatedAthletes.contains(a))
-                participatedAthletes.add(a);
+            if (!containsAthete(a))
+                participatedAthletes.add(new Athlete(a)); // create a copy of the object
         }
     }
 
@@ -254,8 +262,8 @@ abstract class Game {
         // must be sorted first
         official.summarizeResultsByTime(participatedAthletes);
 
-        participatedAthletes.get(0).setScore(5);
-        participatedAthletes.get(1).setScore(2);
-        participatedAthletes.get(2).setScore(1);
+        participatedAthletes.get(0).addScore(5);
+        participatedAthletes.get(1).addScore(2);
+        participatedAthletes.get(2).addScore(1);
     }
 }

@@ -136,10 +136,10 @@ public class DatabaseOperations {
 
         // return superAthletes also
         for (Athlete a : athletes) {
-            if (a.getSportType() == sport || ((a.getSportType() == GameType.SuperAthlete)))
+            if (a.getSportType() == sport || ((a.getSportType() == GameType.SuperAthlete))) {
                 list.add(a);
+            }
         }
-
         return list;
     }
 
@@ -165,6 +165,32 @@ public class DatabaseOperations {
         }
     }
 
+    /**
+     * Gets reference to athlete object by ID
+     * @param id athlete ID
+     * @return athlete reference or null if not found
+     */
+    public Athlete getAthleteByID(int id){
+        for (Athlete a:getAllAthletes()) {
+            if (a.getId() == id){
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * A
+     * @param athlete athlete object to add the score to
+     * @param score score
+     */
+    public void addScoreToAthlete(Athlete athlete,int score){
+        for (Athlete a:getAllAthletes()) {
+            if (athlete.getId() == a.getId()){
+                a.setScore(score);
+            }
+        }
+    }
 
     /**
      * Gets official for a specific sport.

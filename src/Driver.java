@@ -172,7 +172,9 @@ public class Driver {
         } else if (status == GameStatus.Completed) {
             System.out.println();
             String msg = "Your prediction is wrong :(\n";
-            if (userPrediction == game.getWinner())
+
+            // compare by id to avoid problems with different objects
+            if (userPrediction.getId() == game.getWinner().getId())
                 msg = "Your prediction is right :)\n";
             game.displayResults(msg);
             pressToContinue();
@@ -193,6 +195,9 @@ public class Driver {
         pressToContinue();
     }
 
+    /**
+     * Make user winner prediction
+     */
     private void makePrediction() {
 
         if (games.size() > 0) {
@@ -219,8 +224,14 @@ public class Driver {
         }
     }
 
+    /**
+     * <p>Displays all athletes with their scores</p>
+     *
+     */
     private void displayAthletesPoints() {
+        // dummy official
         Official gameOfficial = DatabaseOperations.getInstance().getOfficialForSport(GameType.Running);
+
         ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAllAthletes();
         gameOfficial.summerizeResultsByScore(athletes);
 

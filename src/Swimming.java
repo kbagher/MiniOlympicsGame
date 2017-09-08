@@ -28,7 +28,7 @@ public class Swimming extends Game {
 
     @Override
     public String getSportName() {
-        return "Running";
+        return "Swimming";
     }
 
     @Override

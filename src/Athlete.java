@@ -27,13 +27,18 @@ public class Athlete extends Participant {
         super(id, name, type, state, age);
     }
 
+    public Athlete(Athlete a) {
+        super(a.getId(), a.getName(), a.getSportType(), a.getState(), a.getAge());
+    }
+
+
     /**
      * Sets athlete score based on game rank
      *
      * @param score athlete score in the game
      */
-    public void setScore(int score) {
-        this.score += score; // total score across all games
+    public void addScore(int score) {
+        DatabaseOperations.getInstance().addScoreToAthlete(this,score);
     }
 
     /**
@@ -52,6 +57,15 @@ public class Athlete extends Participant {
      */
     public void setTime(int time) {
         this.time = time;
+    }
+
+    /**
+     * <p>Updates the athlete's score</p>
+     * This method will add up the passed score to the total athlete score
+     * @param score score to be added
+     */
+    public void setScore(int score) {
+        this.score += score; // total score across all games
     }
 
     /**
