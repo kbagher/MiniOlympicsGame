@@ -13,7 +13,7 @@ class Running extends Game {
      * Instantiates a new Running.
      */
     public Running() {
-        super(DatabaseOperations.getInstance().createNewGame(GameType.Running), DatabaseOperations.getInstance().getOfficialForSport(GameType.Running));
+        super(DatabaseOperations.getInstance().createNewGame(SportType.Running), DatabaseOperations.getInstance().getOfficialForSport(SportType.Running));
     }
 
     @Override
@@ -28,7 +28,7 @@ class Running extends Game {
 
     @Override
     public Athlete getRandomAthlete() {
-        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Running);
+        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(SportType.Running);
         int random = GeneralFunctions.getInstance().getRandomNumber(0, athletes.size() - 1);
         return athletes.get(random);
     }

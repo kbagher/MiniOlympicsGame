@@ -23,12 +23,12 @@ public class Athlete extends Participant {
      * @param state athlete state
      * @param age   athlete age
      */
-    public Athlete(int id, String name, GameType type, String state, int age) {
+    public Athlete(int id, String name, SportType type, String state, int age) {
         super(id, name, type, state, age);
     }
 
-    public Athlete(Athlete a) {
-        super(a.getId(), a.getName(), a.getSportType(), a.getState(), a.getAge());
+    public Athlete(Athlete athlete) {
+        super(athlete.getId(), athlete.getName(), athlete.getSportType(), athlete.getState(), athlete.getAge());
     }
 
 

@@ -4,7 +4,7 @@
  *
  * @author Kassem
  */
-public enum GameType {
+public enum SportType {
     /**
      * Running game type.
      */

@@ -306,7 +306,7 @@ public class Driver {
      */
     private void displayAthletesPoints() {
         // dummy official
-        Official gameOfficial = DatabaseOperations.getInstance().getOfficialForSport(GameType.Running);
+        Official gameOfficial = DatabaseOperations.getInstance().getOfficialForSport(SportType.Running);
 
         ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAllAthletes();
         gameOfficial.summarizeResultsByScore(athletes);

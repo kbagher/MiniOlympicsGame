@@ -53,7 +53,7 @@ public class GeneralFunctions {
      *
      * @return true if number is within range
      */
-    public boolean isInRange(@SuppressWarnings("SameParameterValue") int min, int max, int num) {
+    public boolean isInRange(int min, int max, int num) {
         return !(num > max || num < min);
     }
 

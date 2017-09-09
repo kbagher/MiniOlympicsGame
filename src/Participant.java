@@ -23,7 +23,7 @@ public abstract class Participant {
 	/**
 	 * Participant sport type
 	 */
-    private GameType sportType;
+    private SportType sportType;
 
 
     /**
@@ -35,7 +35,7 @@ public abstract class Participant {
      * @param state participant's state
      * @param age   participant's age
      */
-    public Participant(int id, String name, GameType type, String state, int age){
+    public Participant(int id, String name, SportType type, String state, int age){
         this.sportType = type;
         this.name = name;
         this.id = id;
@@ -57,7 +57,7 @@ public abstract class Participant {
 	 *
 	 * @return game type
 	 */
-	public GameType getSportType(){return  sportType;}
+	public SportType getSportType(){return  sportType;}
 
 	/**
 	 * Get the participant's state.

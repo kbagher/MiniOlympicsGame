@@ -18,7 +18,7 @@ public class Swimming extends Game {
      * Instantiates a new Swimming.
      */
     public Swimming() {
-        super(DatabaseOperations.getInstance().createNewGame(GameType.Swimming), DatabaseOperations.getInstance().getOfficialForSport(GameType.Swimming));
+        super(DatabaseOperations.getInstance().createNewGame(SportType.Swimming), DatabaseOperations.getInstance().getOfficialForSport(SportType.Swimming));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Swimming extends Game {
 
     @Override
     public Athlete getRandomAthlete() {
-        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(GameType.Swimming);
+        ArrayList<Athlete> athletes = DatabaseOperations.getInstance().getAthletesForSport(SportType.Swimming);
         int random = GeneralFunctions.getInstance().getRandomNumber(0, athletes.size() - 1);
         return athletes.get(random);
     }

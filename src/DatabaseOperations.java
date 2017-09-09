@@ -71,9 +71,9 @@ public class DatabaseOperations {
      * populate officials data
      */
     private void populateOfficials() {
-        officials.add(new Official(1, "Jon", GameType.Swimming, "Victoria", 34));
-        officials.add(new Official(2, "Khaled", GameType.Running, "New South Wales", 45));
-        officials.add(new Official(3, "Kassem", GameType.Cycling, " Queensland", 51));
+        officials.add(new Official(1, "Jon", SportType.Swimming, "Victoria", 34));
+        officials.add(new Official(2, "Khaled", SportType.Running, "New South Wales", 45));
+        officials.add(new Official(3, "Kassem", SportType.Cycling, " Queensland", 51));
     }
 
     /**
@@ -81,32 +81,32 @@ public class DatabaseOperations {
      */
     private void populateAthletes() {
         // Swimmers
-        athletes.add(new Athlete(1, "David", GameType.Swimming, "Victoria", 23));
-        athletes.add(new Athlete(2, "Adel", GameType.Swimming, "Victoria", 18));
-        athletes.add(new Athlete(3, "Oliver", GameType.Swimming, "Queensland", 29));
-        athletes.add(new Athlete(4, "William", GameType.Swimming, "New South Wales", 31));
-        athletes.add(new Athlete(5, "Jack", GameType.Swimming, "Victoria", 23));
-        athletes.add(new Athlete(6, "Noah", GameType.Swimming, "New South Wales", 24));
+        athletes.add(new Athlete(1, "David", SportType.Swimming, "Victoria", 23));
+        athletes.add(new Athlete(2, "Adel", SportType.Swimming, "Victoria", 18));
+        athletes.add(new Athlete(3, "Oliver", SportType.Swimming, "Queensland", 29));
+        athletes.add(new Athlete(4, "William", SportType.Swimming, "New South Wales", 31));
+        athletes.add(new Athlete(5, "Jack", SportType.Swimming, "Victoria", 23));
+        athletes.add(new Athlete(6, "Noah", SportType.Swimming, "New South Wales", 24));
 
         // Runners
-        athletes.add(new Athlete(7, "Thomas", GameType.Running, "Queensland", 25));
-        athletes.add(new Athlete(8, "James", GameType.Running, "New South Wales", 28));
-        athletes.add(new Athlete(9, "Jackson", GameType.Running, "Victoria", 26));
-        athletes.add(new Athlete(10, "Ethan", GameType.Running, "New South Wales", 20));
-        athletes.add(new Athlete(11, "Lucas", GameType.Running, "Victoria", 31));
+        athletes.add(new Athlete(7, "Thomas", SportType.Running, "Queensland", 25));
+        athletes.add(new Athlete(8, "James", SportType.Running, "New South Wales", 28));
+        athletes.add(new Athlete(9, "Jackson", SportType.Running, "Victoria", 26));
+        athletes.add(new Athlete(10, "Ethan", SportType.Running, "New South Wales", 20));
+        athletes.add(new Athlete(11, "Lucas", SportType.Running, "Victoria", 31));
 
         // Cyclists
-        athletes.add(new Athlete(12, "Liam", GameType.Cycling, "Queensland", 32));
-        athletes.add(new Athlete(13, "Charlie", GameType.Cycling, "Victoria", 23));
-        athletes.add(new Athlete(14, "Henry", GameType.Cycling, "New South Wales", 22));
-        athletes.add(new Athlete(15, "Mason", GameType.Cycling, "Victoria", 27));
+        athletes.add(new Athlete(12, "Liam", SportType.Cycling, "Queensland", 32));
+        athletes.add(new Athlete(13, "Charlie", SportType.Cycling, "Victoria", 23));
+        athletes.add(new Athlete(14, "Henry", SportType.Cycling, "New South Wales", 22));
+        athletes.add(new Athlete(15, "Mason", SportType.Cycling, "Victoria", 27));
 
         // Super Athletes
-        athletes.add(new Athlete(16, "Alexander", GameType.SuperAthlete, "Queensland", 29));
-        athletes.add(new Athlete(17, "Cooper", GameType.SuperAthlete, "Victoria", 23));
-        athletes.add(new Athlete(18, "Samuel", GameType.SuperAthlete, "New South Wales", 24));
-        athletes.add(new Athlete(19, "Jacob", GameType.SuperAthlete, "Victoria", 21));
-        athletes.add(new Athlete(20, "Leo", GameType.SuperAthlete, "New South Wales", 20));
+        athletes.add(new Athlete(16, "Alexander", SportType.SuperAthlete, "Queensland", 29));
+        athletes.add(new Athlete(17, "Cooper", SportType.SuperAthlete, "Victoria", 23));
+        athletes.add(new Athlete(18, "Samuel", SportType.SuperAthlete, "New South Wales", 24));
+        athletes.add(new Athlete(19, "Jacob", SportType.SuperAthlete, "Victoria", 21));
+        athletes.add(new Athlete(20, "Leo", SportType.SuperAthlete, "New South Wales", 20));
 
     }
 
@@ -127,7 +127,7 @@ public class DatabaseOperations {
      *
      * @return the athletes for sport
      */
-    public ArrayList<Athlete> getAthletesForSport(GameType sport) {
+    public ArrayList<Athlete> getAthletesForSport(SportType sport) {
 
         // populate the data first
         populateData();
@@ -136,7 +136,7 @@ public class DatabaseOperations {
 
         // return superAthletes also
         for (Athlete a : athletes) {
-            if (a.getSportType() == sport || ((a.getSportType() == GameType.SuperAthlete))) {
+            if (a.getSportType() == sport || ((a.getSportType() == SportType.SuperAthlete))) {
                 list.add(a);
             }
         }
@@ -152,7 +152,7 @@ public class DatabaseOperations {
      *
      * @return game ID
      */
-    public String createNewGame(GameType type) {
+    public String createNewGame(SportType type) {
         switch (type) {
             case Swimming:
                 return String.format("S%02d", ++swimmingID);
@@ -202,7 +202,7 @@ public class DatabaseOperations {
      *
      * @return game official
      */
-    public Official getOfficialForSport(GameType sport) {
+    public Official getOfficialForSport(SportType sport) {
 
         // populate the data first
         populateData();

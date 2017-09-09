@@ -33,7 +33,7 @@ abstract class Game {
      *
      * @return random time
      */
-    protected abstract int compete();
+    public abstract int compete();
 
     /**
      * Returns a random athlete from the database.
@@ -41,7 +41,7 @@ abstract class Game {
      *
      * @return the random athlete
      */
-    protected abstract Athlete getRandomAthlete();
+    public abstract Athlete getRandomAthlete();
 
     /**
      * Return sport name
@@ -159,7 +159,7 @@ abstract class Game {
         }
 
         // rank (sort) athletes based on time
-        participatedAthletes = official.summarizeResultsByTime(participatedAthletes);
+        official.summarizeResultsByTime(participatedAthletes);
         // set athletes score based on rank
         setAthletesScores();
 

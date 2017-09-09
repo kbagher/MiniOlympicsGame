@@ -19,7 +19,7 @@ public class Official extends Participant {
      * @param state official state
      * @param age   official age
      */
-    public Official(int id, String name, GameType type, String state, int age) {
+    public Official(int id, String name, SportType type, String state, int age) {
         super(id, name, type, state, age);
     }
 
@@ -30,7 +30,7 @@ public class Official extends Participant {
      *
      * @return summarized athletes
      */
-    public ArrayList<Athlete> summarizeResultsByTime(ArrayList<Athlete> athletes) {
+    public void summarizeResultsByTime(ArrayList<Athlete> athletes) {
 
         // loop through athletes and sort them by time
         for (int i = 1; i < athletes.size(); i++) {
@@ -40,7 +40,6 @@ public class Official extends Participant {
                 }
             }
         }
-        return athletes;
     }
 
     /**
